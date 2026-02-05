@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 245 246 250;
+  --foreground: 51 51 51;
+  --primary: 91 79 231;
+  --primary-foreground: 255 255 255;
+  --secondary: 230 231 240;
+  --secondary-foreground: 51 51 51;
+  --accent-purple: 115 103 240;
+  --accent-blue: 115 103 240;
+  --accent: 91 79 231;
+  --accent-foreground: 255 255 255;
+  --muted: 245 246 250;
+  --muted-foreground: 107 114 128;
+  --card: 255 255 255;
+  --card-foreground: 51 51 51;
+  --border: 230 231 240;
+  --border-strong: 200 202 220;
+  --input: 245 246 250;
+  --ring: 91 79 231;
+  --success: 52 211 153;
+  --warning: 251 146 60;
+  --error: 248 113 113;
+  --info: 96 165 250;
+  --text-secondary: 107 114 128;
+  --text-muted: 156 163 175;
+  --text-disabled: 180 185 210;
+  --radius: 0.75rem;
+  
+  /* Soft shadows from dashboard */
+  --shadow-sm: 0 2px 8px rgba(91, 79, 231, 0.06);
+  --shadow-md: 0 4px 16px rgba(91, 79, 231, 0.08);
+  --shadow-lg: 0 8px 32px rgba(91, 79, 231, 0.12);
+  --shadow-card: 0 2px 12px rgba(91, 79, 231, 0.08);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-accent-coral: rgb(var(--accent-coral));
+  --color-accent-lavender: rgb(var(--accent-lavender));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-border: rgb(var(--border));
+  --color-border-strong: rgb(var(--border-strong));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
+  --color-success: rgb(var(--success));
+  --color-warning: rgb(var(--warning));
+  --color-error: rgb(var(--error));
+  --color-info: rgb(var(--info));
+  --color-text-secondary: rgb(var(--text-secondary));
+  --color-text-muted: rgb(var(--text-muted));
+  --color-text-disabled: rgb(var(--text-disabled));
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: rgb(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #F5F6FA;
+  min-height: 100vh;
+  color: rgb(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Dashboard Style Cards & Elements */
+  .dashboard-card {
+    background: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 12px rgba(91, 79, 231, 0.08);
+    border: 1px solid rgba(230, 231, 240, 0.6);
+  }
+  
+  .dashboard-card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .dashboard-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(91, 79, 231, 0.12);
+  }
+  
+  .primary-gradient {
+    background: linear-gradient(135deg, #5B4FE7 0%, #7367F0 100%);
+  }
+  
+  .card-gradient {
+    background: linear-gradient(135deg, #5B4FE7 0%, #7367F0 100%);
+  }
+  
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(230, 231, 240, 0.8);
+  }
+  
+  .neu-flat {
+    background: rgb(var(--background));
+  }
 }
