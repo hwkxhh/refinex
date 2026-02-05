@@ -1,36 +1,208 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Refine - CSV Analytics Web Application
 
-## Getting Started
+A modern, feature-rich CSV analytics platform built with Next.js 16, offering powerful data visualization, analysis, and insights generation capabilities.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8)
+![License](https://img.shields.io/badge/License-MIT-green)
 
+## ✨ Features
+
+- **📊 Interactive Dashboard** - Comprehensive analytics dashboard with real-time data visualization
+- **📈 Multiple Chart Types** - Pie charts, bar charts, line graphs, and activity statistics
+- **📁 CSV Upload & Processing** - Easy drag-and-drop CSV file upload with instant analysis
+- **🎨 Beautiful UI** - Clean, modern interface with smooth animations and transitions
+- **🔍 Data Profiling** - Automatic data quality analysis and statistical profiling
+- **🧹 Data Cleaning** - Built-in tools for handling missing values and data transformation
+- **📊 Custom Visualizations** - Create and customize various chart types based on your data
+- **💾 Project Management** - Save, organize, and revisit your analytics projects
+- **📋 Templates** - Pre-built templates for common data analysis scenarios
+- **🎯 Insights Generation** - AI-powered insights and pattern detection
+- **📱 Responsive Design** - Fully responsive layout for desktop, tablet, and mobile devices
+
+## 🚀 Tech Stack
+
+- **Framework:** Next.js 16.1.6 (App Router)
+- **Language:** TypeScript 5.0
+- **Styling:** Tailwind CSS v4
+- **Animations:** Framer Motion
+- **Icons:** Icons8 (50+ custom icons)
+- **UI Components:** Custom component library
+- **Charts:** Custom SVG-based visualizations
+
+## 📦 Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/hwkxhh/refinex.git
+cd refinex
+```
+
+2. **Install dependencies**
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. **Run the development server**
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Open your browser**
+```
+http://localhost:3000
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Uploading CSV Files
+1. Navigate to the Dashboard
+2. Click the "Upload CSV" button
+3. Drag and drop your CSV file or click to browse
+4. View instant data preview and statistics
 
-## Learn More
+### Creating Projects
+1. Go to Projects page
+2. Click "New Project"
+3. Upload your CSV data
+4. Choose analysis type (Profile, Clean, or Insights)
+5. Configure analysis parameters
+6. Generate visualizations and reports
 
-To learn more about Next.js, take a look at the following resources:
+### Using Templates
+1. Navigate to Templates page
+2. Browse available templates
+3. Select a template matching your use case
+4. Upload your data to auto-configure the analysis
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+csv-analytics-app/
+├── app/
+│   ├── auth/                 # Authentication pages
+│   │   ├── login/
+│   │   ├── signup/
+│   │   └── onboarding/
+│   ├── dashboard/            # Dashboard pages
+│   │   ├── billing/
+│   │   ├── help/
+│   │   ├── projects/
+│   │   ├── settings/
+│   │   ├── templates/
+│   │   ├── upload/
+│   │   └── project/[id]/     # Dynamic project pages
+│   ├── globals.css           # Global styles and theme
+│   ├── layout.tsx
+│   └── page.tsx              # Landing page
+├── components/
+│   ├── layout/               # Layout components
+│   │   ├── sidebar.tsx
+│   │   └── dashboard-header.tsx
+│   └── ui/                   # Reusable UI components
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── input.tsx
+│       └── ...
+├── lib/
+│   ├── mock-data/            # Mock data for development
+│   └── utils.ts              # Utility functions
+├── public/
+│   └── icons8/               # Icons8 icon library
+└── README.md
+```
 
-## Deploy on Vercel
+## 🎨 Design System
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Color Palette
+- **Primary Purple:** `#5B4FE7`
+- **Secondary Purple:** `#7367F0`
+- **Background:** `#F5F6FA`
+- **Card Background:** `#FFFFFF`
+- **Border:** `#E6E7F0`
+- **Text Primary:** `#333333`
+- **Text Secondary:** `#6B7280`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Typography
+- **Font Family:** System fonts (Inter, SF Pro, Segoe UI)
+- **Border Radius:** 0.75rem (12px)
+- **Spacing Scale:** Tailwind default scale
+
+## 🔧 Configuration
+
+### Environment Variables
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+# Add other environment variables as needed
+```
+
+## 📄 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## 🌟 Key Features Breakdown
+
+### Dashboard
+- Credit card overview with transaction history
+- Exchange rates monitoring
+- Income vs. Expense tracking
+- Efficiency metrics (86.3% overall efficiency)
+- Recent transaction list
+- User profile management
+
+### Data Analysis
+- Automatic column type detection
+- Missing value analysis
+- Statistical summaries (mean, median, mode, std dev)
+- Outlier detection
+- Correlation analysis
+
+### Visualizations
+- Interactive pie charts
+- Stacked bar charts
+- Line graphs with trend lines
+- Activity statistics
+- Custom chart builder
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Icons by [Icons8](https://icons8.com)
+- Built with [Next.js](https://nextjs.org)
+- Styled with [Tailwind CSS](https://tailwindcss.com)
+- Animations by [Framer Motion](https://www.framer.com/motion/)
+
+## 📧 Contact
+
+For questions, suggestions, or support, please open an issue on GitHub.
+
+---
+
+**Built with ❤️ using Next.js 16 and TypeScript**
