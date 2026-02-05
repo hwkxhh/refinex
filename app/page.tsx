@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Check, ChevronDown, Play } from 'lucide-react'
+import { ArrowRight, Check, ChevronDown, Play, Upload } from 'lucide-react'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [activeSlice, setActiveSlice] = useState(0)
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [showFeaturesDropdown, setShowFeaturesDropdown] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -89,60 +90,191 @@ export default function Home() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 glass-effect"
+        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-border"
       >
         <div className="mx-auto px-6 lg:px-12 max-w-[1400px]">
           <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center gap-3 group">
-              <motion.div 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative w-12 h-12 rounded-2xl dashboard-card flex items-center justify-center"
-              >
-                <Image 
-                  src="/icons8/icons8-bar-chart-50.png" 
-                  alt="Logo"
-                  width={28}
-                  height={28}
-                />
-              </motion.div>
-              <span className="text-xl font-bold text-foreground">Refine</span>
-            </Link>
-            
-            <div className="hidden md:flex items-center gap-10">
-              {[
-                { label: 'Features', href: '#features' },
-                { label: 'How it works', href: '#how-it-works' },
-                { label: 'Pricing', href: '#pricing' }
-              ].map((item) => (
-                <Link 
-                  key={item.label}
-                  href={item.href} 
-                  className="text-sm font-semibold text-text-secondary hover:text-primary transition-colors"
+            {/* Left Side */}
+            <div className="flex items-center gap-10">
+              {/* Brand */}
+              <Link href="/" className="flex items-center gap-3 group">
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative w-10 h-10 flex items-center justify-center"
                 >
-                  {item.label}
+                  <Image 
+                    src="/images/refinex.svg" 
+                    alt="Refine Logo"
+                    width={40}
+                    height={40}
+                    className="object-contain"
+                  />
+                </motion.div>
+                <span className="text-xl font-bold text-primary">Refinex</span>
+              </Link>
+              
+              {/* Navigation Links */}
+              <div className="hidden lg:flex items-center gap-8">
+                {/* Features Dropdown */}
+                <div 
+                  className="relative"
+                  onMouseEnter={() => setShowFeaturesDropdown(true)}
+                  onMouseLeave={() => setShowFeaturesDropdown(false)}
+                >
+                  <button className="flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors py-2">
+                    Features
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showFeaturesDropdown ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  <AnimatePresence>
+                    {showFeaturesDropdown && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full left-0 mt-2 w-[720px] bg-white rounded-2xl shadow-xl border border-border overflow-hidden"
+                      >
+                        <div className="p-6">
+                          <div className="grid grid-cols-2 gap-4">
+                            {/* Clean CSV */}
+                            <Link href="#clean-csv" className="group p-5 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:to-blue-50 transition-all border-2 border-transparent hover:border-primary/20">
+                              <div className="flex items-start gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                  <Image src="/icons8/icons8-approval-50.png" alt="" width={32} height={32} />
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">Clean CSV</h3>
+                                  <p className="text-sm text-gray-600 leading-relaxed">Remove duplicates, handle missing values, and fix data quality issues automatically</p>
+                                </div>
+                              </div>
+                            </Link>
+
+                            {/* Charts */}
+                            <Link href="#charts" className="group p-5 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:to-blue-50 transition-all border-2 border-transparent hover:border-primary/20">
+                              <div className="flex items-start gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                  <Image src="/icons8/icons8-pie-chart-50.png" alt="" width={32} height={32} />
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">Charts</h3>
+                                  <p className="text-sm text-gray-600 leading-relaxed">Create stunning visualizations with pie charts, bar graphs, and line plots instantly</p>
+                                </div>
+                              </div>
+                            </Link>
+
+                            {/* Data Cleaning */}
+                            <Link href="#data-cleaning" className="group p-5 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:to-blue-50 transition-all border-2 border-transparent hover:border-primary/20">
+                              <div className="flex items-start gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                  <Image src="/icons8/icons8-process-50.png" alt="" width={32} height={32} />
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">Data Cleaning</h3>
+                                  <p className="text-sm text-gray-600 leading-relaxed">Transform, validate, and standardize your data with powerful cleaning tools</p>
+                                </div>
+                              </div>
+                            </Link>
+
+                            {/* Analysis */}
+                            <Link href="#analysis" className="group p-5 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:to-blue-50 transition-all border-2 border-transparent hover:border-primary/20">
+                              <div className="flex items-start gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-100 to-violet-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                  <Image src="/icons8/icons8-statistics-50.png" alt="" width={32} height={32} />
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">Analysis</h3>
+                                  <p className="text-sm text-gray-600 leading-relaxed">Get comprehensive statistical insights, trends, and patterns from your data</p>
+                                </div>
+                              </div>
+                            </Link>
+
+                            {/* Charts Analysis */}
+                            <Link href="#charts-analysis" className="group p-5 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:to-blue-50 transition-all border-2 border-transparent hover:border-primary/20">
+                              <div className="flex items-start gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-100 to-pink-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                  <Image src="/icons8/icons8-line-chart-50.png" alt="" width={32} height={32} />
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">Charts Analysis</h3>
+                                  <p className="text-sm text-gray-600 leading-relaxed">Advanced analytics with interactive charts and real-time data exploration</p>
+                                </div>
+                              </div>
+                            </Link>
+
+                            {/* AI Insights - Bonus */}
+                            <Link href="#ai-insights" className="group p-5 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:to-blue-50 transition-all border-2 border-transparent hover:border-primary/20">
+                              <div className="flex items-start gap-4">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-100 to-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                  <Image src="/icons8/icons8-chatbot-50.png" alt="" width={32} height={32} />
+                                </div>
+                                <div className="flex-1">
+                                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">AI Insights</h3>
+                                  <p className="text-sm text-gray-600 leading-relaxed">AI-powered recommendations and automated insights generation</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+
+                          {/* Bottom CTA */}
+                          <div className="mt-6 pt-6 border-t border-border">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-sm font-semibold text-gray-900">Ready to get started?</p>
+                                <p className="text-xs text-gray-500">Try all features with a free account</p>
+                              </div>
+                              <Link href="/auth/signup">
+                                <button className="px-6 py-2.5 rounded-xl card-gradient text-white text-sm font-semibold hover:shadow-lg transition-all flex items-center gap-2">
+                                  Start Free Trial
+                                  <ArrowRight className="w-4 h-4" />
+                                </button>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <Link href="#connections" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  Connections
                 </Link>
-              ))}
+                <Link href="#pricing" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  Pricing
+                </Link>
+              </div>
             </div>
 
+            {/* Right Side */}
             <div className="flex items-center gap-3">
               <Link href="/auth/login">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 h-11 rounded-xl font-semibold text-text-secondary hover:text-foreground transition-colors"
+                  className="px-6 h-11 rounded-xl font-semibold text-gray-700 hover:text-primary hover:bg-[#F5F6FA] transition-all"
                 >
-                  Sign in
+                  Login
                 </motion.button>
               </Link>
               <Link href="/auth/signup">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 h-11 rounded-xl card-gradient text-white font-semibold shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+                  className="px-6 h-11 rounded-xl card-gradient text-white font-semibold shadow-sm hover:shadow-md transition-all flex items-center gap-2"
                 >
-                  Start free
+                  Sign Up
                   <ArrowRight className="w-4 h-4" />
+                </motion.button>
+              </Link>
+              <Link href="/dashboard">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="hidden md:flex px-6 h-11 rounded-xl bg-[#F5F6FA] border border-border font-semibold text-gray-700 hover:border-primary transition-all items-center gap-2"
+                >
+                  Dashboard
                 </motion.button>
               </Link>
             </div>
@@ -208,14 +340,14 @@ export default function Home() {
                     </motion.div>
                   </motion.button>
                 </Link>
-                <Link href="/dashboard">
+                <Link href="/dashboard/upload">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="px-8 h-14 rounded-2xl dashboard-card font-bold text-lg flex items-center justify-center gap-2"
                   >
-                    <Play className="w-5 h-5" />
-                    Watch demo
+                    <Upload className="w-5 h-5" />
+                    Upload CSV
                   </motion.button>
                 </Link>
               </div>
@@ -426,13 +558,13 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="relative rounded-2xl bg-muted/20 p-6 flex-1">
-                        <div className="flex items-end justify-between h-full gap-3 pb-8">
+                      <div className="relative rounded-2xl bg-muted/20 p-6 flex-1 min-h-[320px]">
+                        <div className="flex items-end justify-between gap-3 pb-8" style={{ height: '240px' }}>
                           {monthlyData.map((data, i) => (
                             <div key={i} className="flex-1 flex flex-col justify-end items-center gap-2">
                               <motion.div
                                 initial={{ height: 0 }}
-                                animate={{ height: `${data.value}%` }}
+                                animate={{ height: `${(data.value / 100) * 240}px` }}
                                 transition={{ duration: 0.8, delay: i * 0.1 }}
                                 className="w-full rounded-t-xl relative group cursor-pointer"
                                 style={{ 
@@ -540,12 +672,13 @@ export default function Home() {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
-                className="absolute -left-6 top-20 hidden xl:block"
+                className="absolute -left-24 top-20 hidden xl:block z-20"
               >
                 <motion.div 
                   animate={{ y: [0, -12, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="dashboard-card rounded-2xl p-5 shadow-lg"
+                  className="dashboard-card rounded-2xl p-5 shadow-xl backdrop-blur-lg"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -568,12 +701,13 @@ export default function Home() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 1.4 }}
-                className="absolute -right-6 bottom-20 hidden xl:block"
+                className="absolute -right-24 bottom-20 hidden xl:block z-20"
               >
                 <motion.div 
                   animate={{ y: [0, 12, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="dashboard-card rounded-2xl p-5 shadow-lg"
+                  className="dashboard-card rounded-2xl p-5 shadow-xl backdrop-blur-lg"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center">
@@ -599,6 +733,227 @@ export default function Home() {
       {/* How It Works */}
       <section id="how-it-works" className="py-20 lg:py-28 relative">
         <div className="mx-auto px-6 lg:px-12 max-w-[1400px]">
+          {/* Animated Workflow Illustration */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="mb-24 relative"
+          >
+            <div className="relative mx-auto max-w-5xl" style={{ height: '400px' }}>
+              {/* Left Side - Input Files */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 space-y-4 z-10">
+                {[
+                  { label: 'sales.csv', delay: 0 },
+                  { label: 'users.csv', delay: 0.15 },
+                  { label: 'products.csv', delay: 0.3 },
+                  { label: 'orders.csv', delay: 0.45 }
+                ].map((file, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: file.delay }}
+                    className="dashboard-card px-4 py-3 rounded-xl backdrop-blur-lg shadow-lg"
+                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', width: '140px' }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                      </div>
+                      <span className="text-xs font-bold text-foreground">{file.label}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Animated Connection Lines to Center */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+                {[0, 1, 2, 3].map((index) => (
+                  <motion.path
+                    key={index}
+                    d={`M 150 ${115 + index * 70} Q 280 ${150 + index * 40} 360 200`}
+                    stroke="rgba(99, 102, 241, 0.15)"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeDasharray="4,4"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay: 0.4 + index * 0.1 }}
+                  />
+                ))}
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#6366f1" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="#6366f1" stopOpacity="0.8" />
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              {/* Center - Processing Platform */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 1 }}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                style={{ zIndex: 5 }}
+              >
+                <div className="relative">
+                  {/* Main Platform Card */}
+                  <div 
+                    className="dashboard-card p-8 rounded-3xl backdrop-blur-lg shadow-2xl relative overflow-hidden"
+                    style={{ 
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                      width: '280px',
+                      height: '240px',
+                      border: '3px solid #6366f1'
+                    }}
+                  >
+                    {/* Animated Grid Inside */}
+                    <div className="grid grid-cols-4 gap-2 mb-4">
+                      {Array.from({ length: 16 }).map((_, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0.3 }}
+                          animate={{ 
+                            opacity: [0.3, 1, 0.3],
+                            scale: [1, 1.1, 1]
+                          }}
+                          transition={{ 
+                            duration: 2,
+                            delay: i * 0.1,
+                            repeat: Infinity,
+                            repeatDelay: 1
+                          }}
+                          className="h-6 rounded-md"
+                          style={{ 
+                            background: i % 2 === 0 
+                              ? 'linear-gradient(135deg, #6366f1, #818cf8)' 
+                              : 'linear-gradient(135deg, #818cf8, #a5b4fc)'
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Platform Label */}
+                    <div className="text-center mt-4">
+                      <p className="text-xl font-bold text-primary mb-1">Refinex</p>
+                      <p className="text-xs text-text-muted font-semibold">AI Processing</p>
+                    </div>
+
+                    {/* Processing Icons */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-3">
+                      {['✓', '⚡', '🔍', '📊'].map((icon, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ 
+                            duration: 0.5, 
+                            delay: 1.5 + i * 0.2,
+                          }}
+                          className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-xs"
+                        >
+                          {icon}
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Pulse Animation */}
+                    <div
+                      className="absolute inset-0 rounded-3xl border-2 border-primary pointer-events-none"
+                      style={{ opacity: 0.3 }}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Animated Connection Lines to Right */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+                {[0, 1, 2].map((index) => (
+                  <motion.path
+                    key={`right-${index}`}
+                    d={`M 490 200 Q 620 ${165 + index * 50} 750 ${145   + index * 68}`}
+                    stroke="rgba(99, 102, 241, 0.15)"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeDasharray="4,4"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay: 1.2 + index * 0.1 }}
+                  />
+                ))}
+                <defs>
+                  <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#6366f1" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="#a5b4fc" stopOpacity="0.4" />
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              {/* Right Side - Output Results */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 space-y-4 z-20">
+                {[
+                  { label: 'Insights', icon: '💡', delay: 2 },
+                  { label: 'Charts', icon: '📊', delay: 2.2 },
+                  { label: 'Reports', icon: '📄', delay: 2.4 }
+                ].map((output, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: output.delay }}
+                    whileHover={{ scale: 1.05, x: -5 }}
+                    className="dashboard-card px-5 py-4 rounded-xl backdrop-blur-lg shadow-lg cursor-pointer"
+                    style={{ 
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      width: '140px',
+                      border: '2px solid #a5b4fc'
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="text-2xl">{output.icon}</div>
+                      <div>
+                        <span className="text-sm font-bold text-foreground block">{output.label}</span>
+                        <span className="text-xs text-primary font-semibold">Ready</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Floating Particles */}
+              {Array.from({ length: 8 }).map((_, i) => (
+                <motion.div
+                  key={`particle-${i}`}
+                  className="absolute w-2 h-2 rounded-full bg-primary/30"
+                  style={{
+                    left: `${20 + i * 12}%`,
+                    top: `${30 + (i % 3) * 20}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    delay: i * 0.3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              ))}
+            </div>
+          </motion.div>
+
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

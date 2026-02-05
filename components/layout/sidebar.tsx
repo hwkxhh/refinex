@@ -37,10 +37,14 @@ export function Sidebar() {
     <aside className="hidden md:flex w-64 flex-col border-r border-border bg-white/80 backdrop-blur-sm">
       {/* Logo */}
       <div className="h-20 flex items-center gap-3 px-6 border-b border-border">
-        <div className="flex items-center gap-1">
-          <div className="w-1 h-6 bg-primary rounded-full"></div>
-          <div className="w-1 h-6 bg-primary rounded-full"></div>
-          <div className="w-1 h-6 bg-primary rounded-full"></div>
+        <div className="w-10 h-10 flex items-center justify-center">
+          <Image 
+            src="/images/refinex.svg" 
+            alt="Refine Logo"
+            width={40}
+            height={40}
+            className="object-contain"
+          />
         </div>
         <span className="text-xl font-bold text-primary">Refine</span>
       </div>

@@ -7,6 +7,7 @@ import { Mail, Lock, User, BarChart3, ArrowLeft, CheckCircle2 } from 'lucide-rea
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Alert } from '@/components/ui/alert'
+import { AvatarSelector } from '@/components/ui/avatar-selector'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -14,7 +15,8 @@ export default function SignupPage() {
     name: '',
     email: '',
     password: '',
-    useCase: ''
+    useCase: '',
+    avatar: '/users/icons8-politician-female-skin-type-3-64.png' // Default avatar
   })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -144,6 +146,12 @@ export default function SignupPage() {
                 <option value="other">Other</option>
               </select>
             </div>
+
+            {/* Avatar Selector */}
+            <AvatarSelector
+              selectedAvatar={formData.avatar}
+              onSelect={(avatar) => setFormData({ ...formData, avatar })}
+            />
 
             <div className="flex items-start gap-2">
               <input type="checkbox" className="mt-1 rounded border-input" required />

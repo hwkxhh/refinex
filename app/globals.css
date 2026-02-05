@@ -1,38 +1,66 @@
 @import "tailwindcss";
 
 :root {
-  --background: 245 246 250;
-  --foreground: 51 51 51;
-  --primary: 91 79 231;
-  --primary-foreground: 255 255 255;
-  --secondary: 230 231 240;
-  --secondary-foreground: 51 51 51;
-  --accent-purple: 115 103 240;
-  --accent-blue: 115 103 240;
-  --accent: 91 79 231;
-  --accent-foreground: 255 255 255;
-  --muted: 245 246 250;
-  --muted-foreground: 107 114 128;
-  --card: 255 255 255;
-  --card-foreground: 51 51 51;
-  --border: 230 231 240;
-  --border-strong: 200 202 220;
-  --input: 245 246 250;
-  --ring: 91 79 231;
-  --success: 52 211 153;
-  --warning: 251 146 60;
-  --error: 248 113 113;
-  --info: 96 165 250;
-  --text-secondary: 107 114 128;
-  --text-muted: 156 163 175;
-  --text-disabled: 180 185 210;
-  --radius: 0.75rem;
+  /* Backgrounds - Soft gradients */
+  --background: 238 242 255; /* #eef2ff */
+  --foreground: 31 41 55; /* #1f2937 - Soft dark */
   
-  /* Soft shadows from dashboard */
-  --shadow-sm: 0 2px 8px rgba(91, 79, 231, 0.06);
-  --shadow-md: 0 4px 16px rgba(91, 79, 231, 0.08);
-  --shadow-lg: 0 8px 32px rgba(91, 79, 231, 0.12);
-  --shadow-card: 0 2px 12px rgba(91, 79, 231, 0.08);
+  /* Primary - Indigo palette */
+  --primary: 99 102 241; /* #6366f1 */
+  --primary-400: 129 140 248; /* #818cf8 */
+  --primary-300: 165 180 252; /* #a5b4fc */
+  --primary-foreground: 255 255 255;
+  
+  /* Accents - Pastel */
+  --accent-pink: 249 168 212; /* #f9a8d4 */
+  --accent-blue: 147 197 253; /* #93c5fd */
+  --accent-cyan: 103 232 249; /* #67e8f9 */
+  --accent: 99 102 241;
+  --accent-foreground: 255 255 255;
+  
+  /* Text - Low contrast */
+  --text-primary: 31 41 55; /* #1f2937 */
+  --text-secondary: 107 114 128; /* #6b7280 */
+  --text-muted: 156 163 175; /* #9ca3af */
+  
+  /* Cards - Glass effect */
+  --card: 255 255 255;
+  --card-foreground: 31 41 55;
+  --bg-surface: rgba(255, 255, 255, 0.55);
+  --bg-glass: rgba(255, 255, 255, 0.45);
+  
+  /* Borders - Soft */
+  --border: 226 232 240; /* Soft border */
+  --border-glass: rgba(255, 255, 255, 0.3);
+  --border-strong: 203 213 225;
+  
+  /* Secondary & Muted */
+  --secondary: 241 245 249;
+  --secondary-foreground: 31 41 55;
+  --muted: 241 245 249;
+  --muted-foreground: 107 114 128;
+  --input: 248 250 252;
+  --ring: 99 102 241;
+  
+  /* Status - Soft tones */
+  --success: 134 239 172; /* #86efac */
+  --warning: 253 230 138; /* #fde68a */
+  --error: 252 165 165; /* #fca5a5 */
+  --info: 147 197 253;
+  
+  /* Spacing & Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius: 1rem;
+  
+  /* Soft shadows - No harsh blacks */
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.1);
 }
 
 @theme inline {
@@ -73,12 +101,14 @@ html {
 }
 
 body {
-  background: #F5F6FA;
+  background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
   min-height: 100vh;
   color: rgb(var(--foreground));
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
 @layer utilities {
@@ -86,12 +116,14 @@ body {
     text-wrap: balance;
   }
   
-  /* Dashboard Style Cards & Elements */
+  /* Dashboard Style Cards & Elements - Soft Glassmorphism */
   .dashboard-card {
-    background: #ffffff;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 12px rgba(91, 79, 231, 0.08);
-    border: 1px solid rgba(230, 231, 240, 0.6);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
   }
   
   .dashboard-card-hover {
@@ -100,21 +132,31 @@ body {
   
   .dashboard-card-hover:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(91, 79, 231, 0.12);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
   }
   
   .primary-gradient {
-    background: linear-gradient(135deg, #5B4FE7 0%, #7367F0 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
   }
   
   .card-gradient {
-    background: linear-gradient(135deg, #5B4FE7 0%, #7367F0 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #a5b4fc 100%);
   }
   
   .glass-effect {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(230, 231, 240, 0.8);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  
+  .soft-shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card-shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
   
   .neu-flat {
