@@ -22,7 +22,7 @@ export function DashboardHeader() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search projects..."
+                placeholder="Search datasets, insights, or analyses..."
                 className="w-full h-11 pl-12 pr-4 rounded-xl bg-[#F5F6FA] border border-[#E6E7F0] text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/30 transition-all"
               />
             </div>
@@ -32,9 +32,10 @@ export function DashboardHeader() {
         {/* Center: Workspace Dropdown (hidden on mobile) */}
         <div className="hidden lg:flex items-center gap-2">
           <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F5F6FA] border border-[#E6E7F0] hover:bg-gray-50 transition-all">
-            <span className="text-sm font-semibold text-gray-700">My Workspace</span>
+            <span className="text-sm font-semibold text-gray-700">Rider Payments</span>
             <ChevronDown className="w-4 h-4 text-gray-500" />
           </button>
+          <button className="text-xs text-primary font-semibold hover:underline">+ New Workspace</button>
         </div>
 
         {/* Right: Actions */}
@@ -42,7 +43,7 @@ export function DashboardHeader() {
           <Link href="/dashboard/upload">
             <Button size="sm" className="hidden sm:flex h-11 px-5 rounded-xl card-gradient text-white font-semibold shadow-sm hover:shadow-md">
               <Upload className="w-4 h-4 mr-2" />
-              Upload
+              + New Analysis
             </Button>
           </Link>
 
@@ -68,6 +69,9 @@ export function DashboardHeader() {
                   <p className="text-sm font-medium text-foreground">John Doe</p>
                   <p className="text-xs text-text-muted">john@example.com</p>
                 </div>
+                <Link href="/dashboard/settings" className="block px-4 py-2 text-sm text-text-secondary hover:bg-muted">
+                  Profile
+                </Link>
                 <Link href="/dashboard/settings" className="block px-4 py-2 text-sm text-text-secondary hover:bg-muted">
                   Settings
                 </Link>

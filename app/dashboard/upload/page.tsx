@@ -105,11 +105,13 @@ export default function UploadPage() {
                     className="hidden"
                     id="file-upload"
                   />
-                  <label htmlFor="file-upload">
-                    <Button as="span" className="cursor-pointer">
-                      Select File
-                    </Button>
-                  </label>
+                  <Button
+                    type="button"
+                    className="cursor-pointer"
+                    onClick={() => document.getElementById('file-upload')?.click()}
+                  >
+                    Select File
+                  </Button>
                 </div>
                 <div className="flex items-center gap-6 text-sm text-text-muted mt-4">
                   <div className="flex items-center gap-2">

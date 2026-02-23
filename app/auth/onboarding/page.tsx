@@ -2,30 +2,31 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { BarChart3, ChevronRight, ChevronLeft, Upload, Database, Code, TrendingUp, Users, DollarSign, Package, Briefcase } from 'lucide-react'
+import { BarChart3, ChevronRight, ChevronLeft, Upload, Building2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
-const domains = [
-  { id: 'sales', name: 'Sales & Revenue', icon: TrendingUp, description: 'Track sales performance and revenue trends' },
-  { id: 'customer', name: 'Customer Analytics', icon: Users, description: 'Understand customer behavior and retention' },
-  { id: 'financial', name: 'Financial Data', icon: DollarSign, description: 'Analyze financial metrics and reports' },
-  { id: 'operations', name: 'Operations', icon: Package, description: 'Monitor operational efficiency' },
-  { id: 'marketing', name: 'Marketing', icon: BarChart3, description: 'Measure campaign performance' },
-  { id: 'hr', name: 'Human Resources', icon: Briefcase, description: 'Track HR metrics and analytics' }
+const organizationTypes = [
+  { id: 'school', name: '🏫 School or University' },
+  { id: 'hospital', name: '🏥 Hospital or Clinic' },
+  { id: 'ngo', name: '🤝 NGO or Non-profit' },
+  { id: 'retail', name: '🛒 Retail or Supermarket' },
+  { id: 'logistics', name: '🚚 Logistics or Delivery' },
+  { id: 'business', name: '🏢 Business or Corporation' },
+  { id: 'government', name: '🏛️ Government or Public Sector' },
+  { id: 'research', name: '🔬 Research or Academia' },
+  { id: 'other', name: 'Other' },
 ]
 
-const experienceLevels = [
-  { id: 'beginner', name: 'Beginner', description: 'New to data analysis' },
-  { id: 'intermediate', name: 'Intermediate', description: 'Some experience with data' },
-  { id: 'advanced', name: 'Advanced', description: 'Experienced data analyst' }
-]
+const dataTeamSizes = ['Just me', '2–5 people', '6–20 people', '20+ people']
 
 export default function OnboardingPage() {
   const router = useRouter()
   const [step, setStep] = useState(1)
-  const [selectedDomain, setSelectedDomain] = useState('')
-  const [selectedExperience, setSelectedExperience] = useState('')
+  const [organizationType, setOrganizationType] = useState('')
+  const [teamSize, setTeamSize] = useState('')
+  const [workspaceName, setWorkspaceName] = useState('')
+  const [workspaceGoal, setWorkspaceGoal] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const handleNext = () => {
@@ -39,13 +40,13 @@ export default function OnboardingPage() {
   const handleComplete = () => {
     setIsLoading(true)
     setTimeout(() => {
-      router.push('/dashboard')
+      router.push('/dashboard/upload')
     }, 1000)
   }
 
   const canProceed = () => {
-    if (step === 1) return selectedDomain !== ''
-    if (step === 2) return selectedExperience !== ''
+    if (step === 1) return organizationType !== '' && teamSize !== ''
+    if (step === 2) return workspaceName.trim().length > 0
     return true
   }
 
@@ -59,7 +60,7 @@ export default function OnboardingPage() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <BarChart3 className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">Refine Analysis</span>
+              <span className="text-xl font-bold text-foreground">RefineX</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-text-muted">
               Step {step} of 3
@@ -87,128 +88,139 @@ export default function OnboardingPage() {
       {/* Content */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-4xl">
-          {/* Step 1: Data Domain */}
+          {/* Step 1: About You */}
           {step === 1 && (
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold text-foreground mb-4">
-                What type of data will you analyze?
+                Welcome to RefineX. Let&apos;s set things up.
               </h1>
               <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-                This helps us provide relevant templates and analytics tailored to your needs
+                This takes 60 seconds and helps us personalize your experience.
               </p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
-                {domains.map((domain) => (
-                  <Card
-                    key={domain.id}
-                    className={`cursor-pointer transition-all duration-200 ${
-                      selectedDomain === domain.id
-                        ? 'border-primary shadow-lg scale-105'
-                        : 'border-border hover:border-accent-coral/50'
-                    }`}
-                    onClick={() => setSelectedDomain(domain.id)}
-                  >
-                    <CardContent className="p-6">
-                      <div className={`w-12 h-12 rounded-lg ${
-                        selectedDomain === domain.id ? 'bg-primary' : 'bg-primary/10'
-                      } flex items-center justify-center mb-4`}>
-                        <domain.icon className={`w-6 h-6 ${
-                          selectedDomain === domain.id ? 'text-primary-foreground' : 'text-primary'
-                        }`} />
-                      </div>
-                      <h3 className="font-semibold text-foreground mb-2">{domain.name}</h3>
-                      <p className="text-sm text-text-secondary">{domain.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="mt-10 max-w-4xl mx-auto text-left">
+                <p className="text-sm font-semibold text-foreground mb-3">What best describes your organization?</p>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {organizationTypes.map((org) => (
+                    <Card
+                      key={org.id}
+                      className={`cursor-pointer transition-all duration-200 ${
+                        organizationType === org.id
+                          ? 'border-primary shadow-lg scale-[1.02]'
+                          : 'border-border hover:border-accent-coral/50'
+                      }`}
+                      onClick={() => setOrganizationType(org.id)}
+                    >
+                      <CardContent className="p-4">
+                        <p className="text-sm font-medium text-foreground">{org.name}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <p className="text-sm font-semibold text-foreground mb-3 mt-8">How many people work with data at your organization?</p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {dataTeamSizes.map((size) => (
+                    <Card
+                      key={size}
+                      className={`cursor-pointer transition-all duration-200 ${
+                        teamSize === size
+                          ? 'border-primary shadow-lg scale-[1.02]'
+                          : 'border-border hover:border-accent-coral/50'
+                      }`}
+                      onClick={() => setTeamSize(size)}
+                    >
+                      <CardContent className="p-4">
+                        <p className="text-sm font-medium text-foreground">{size}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
           )}
 
-          {/* Step 2: Experience Level */}
+          {/* Step 2: First Workspace */}
           {step === 2 && (
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold text-foreground mb-4">
-                What&apos;s your experience level?
+                Create your first workspace
               </h1>
               <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-                We&apos;ll customize the interface to match your expertise
+                A workspace keeps related datasets and analyses together. You can create more later.
               </p>
-              <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-3xl mx-auto">
-                {experienceLevels.map((level) => (
-                  <Card
-                    key={level.id}
-                    className={`cursor-pointer transition-all duration-200 ${
-                      selectedExperience === level.id
-                        ? 'border-primary shadow-lg scale-105'
-                        : 'border-border hover:border-accent-coral/50'
-                    }`}
-                    onClick={() => setSelectedExperience(level.id)}
-                  >
-                    <CardContent className="p-8 text-center">
-                      <div className={`w-16 h-16 rounded-full ${
-                        selectedExperience === level.id ? 'bg-primary' : 'bg-primary/10'
-                      } flex items-center justify-center mx-auto mb-4`}>
-                        <Database className={`w-8 h-8 ${
-                          selectedExperience === level.id ? 'text-primary-foreground' : 'text-primary'
-                        }`} />
-                      </div>
-                      <h3 className="text-xl font-semibold text-foreground mb-2">{level.name}</h3>
-                      <p className="text-text-secondary">{level.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+
+              <div className="max-w-2xl mx-auto mt-10 space-y-5 text-left">
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">Workspace name</label>
+                  <div className="relative">
+                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
+                    <input
+                      className="w-full h-11 rounded-xl border border-input bg-card pl-10 pr-3 text-sm"
+                      value={workspaceName}
+                      onChange={(e) => setWorkspaceName(e.target.value)}
+                      placeholder="e.g., Monthly Payroll, Student Records, Sales Reports"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">What goal does this workspace serve?</label>
+                  <input
+                    className="w-full h-11 rounded-xl border border-input bg-card px-3 text-sm"
+                    value={workspaceGoal}
+                    onChange={(e) => setWorkspaceGoal(e.target.value)}
+                    placeholder="e.g., Track rider payment accuracy each week"
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setStep(3)}
+                  className="text-sm text-primary font-medium hover:underline"
+                >
+                  I&apos;ll set this up later
+                </button>
               </div>
             </div>
           )}
 
-          {/* Step 3: Upload or Sample */}
+          {/* Step 3: Upload first file */}
           {step === 3 && (
             <div className="text-center mb-12">
               <h1 className="text-4xl font-bold text-foreground mb-4">
-                Ready to start analyzing?
+                Now, let&apos;s see your data.
               </h1>
-              <p className="text-lg text-text-secondary max-w-2xl mx-auto mb-12">
-                Upload your CSV file or try a sample dataset
+              <p className="text-lg text-text-secondary max-w-2xl mx-auto mb-10">
+                Upload any CSV or Excel file. We&apos;ll show you what RefineX does with it.
               </p>
-              <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                <Card 
-                  className="border-border hover:border-accent-coral/50 cursor-pointer transition-all duration-200 hover:shadow-lg"
-                  onClick={() => router.push('/dashboard/upload')}
-                >
-                  <CardContent className="p-12 text-center">
-                    <div className="w-20 h-20 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                      <Upload className="w-10 h-10 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-foreground mb-3">Upload CSV</h3>
-                    <p className="text-text-secondary mb-6">
-                      Start with your own data file
-                    </p>
-                    <Button className="w-full">
-                      Choose File
-                    </Button>
-                  </CardContent>
-                </Card>
 
-                <Card 
-                  className="border-border hover:border-accent-coral/50 cursor-pointer transition-all duration-200 hover:shadow-lg"
-                  onClick={() => {
-                    setIsLoading(true)
-                    setTimeout(() => router.push('/dashboard'), 1000)
-                  }}
+              <Card className="max-w-2xl mx-auto border-border">
+                <CardContent className="p-10 text-center">
+                  <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <Upload className="w-8 h-8 text-primary" />
+                  </div>
+                  <p className="text-lg font-semibold text-foreground">Drag and drop your file here</p>
+                  <p className="text-sm text-text-muted mt-1">or</p>
+                  <Button className="mt-4">Browse files</Button>
+                  <p className="text-xs text-text-muted mt-4">Accepts CSV, XLSX, XLS · Up to 5MB on free plan</p>
+
+                  <button type="button" className="mt-4 text-sm text-primary font-medium hover:underline">
+                    Don&apos;t have a file ready? Try with our sample dataset →
+                  </button>
+                </CardContent>
+              </Card>
+
+              <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <Button onClick={handleComplete} isLoading={isLoading}>
+                  Analyze This File →
+                </Button>
+                <button
+                  type="button"
+                  onClick={() => router.push('/dashboard')}
+                  className="text-sm text-text-secondary hover:text-foreground"
                 >
-                  <CardContent className="p-12 text-center">
-                    <div className="w-20 h-20 rounded-xl bg-accent-coral/10 flex items-center justify-center mx-auto mb-6">
-                      <Code className="w-10 h-10 text-accent-coral" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-foreground mb-3">Use Sample Data</h3>
-                    <p className="text-text-secondary mb-6">
-                      Explore with our demo dataset
-                    </p>
-                    <Button variant="outline" className="w-full" isLoading={isLoading}>
-                      Try Sample
-                    </Button>
-                  </CardContent>
-                </Card>
+                  Skip for now — take me to my dashboard
+                </button>
               </div>
             </div>
           )}
@@ -224,13 +236,24 @@ export default function OnboardingPage() {
               Back
             </Button>
 
-            {step < 3 && (
+            {step === 1 && (
               <Button
                 onClick={handleNext}
                 disabled={!canProceed()}
                 size="lg"
               >
-                Continue
+                Continue →
+                <ChevronRight className="w-4 h-4 ml-2" />
+              </Button>
+            )}
+
+            {step === 2 && (
+              <Button
+                onClick={handleNext}
+                disabled={!canProceed()}
+                size="lg"
+              >
+                Create Workspace →
                 <ChevronRight className="w-4 h-4 ml-2" />
               </Button>
             )}

@@ -154,9 +154,9 @@ export default function SettingsPage() {
               <p className="font-medium text-foreground">Data retention</p>
               <p className="text-sm text-text-secondary">Keep project data for 90 days after deletion</p>
             </div>
-            <select className="h-9 px-3 rounded-lg border border-input bg-card text-sm">
+            <select defaultValue="90 days" className="h-9 px-3 rounded-lg border border-input bg-card text-sm">
               <option>30 days</option>
-              <option selected>90 days</option>
+              <option>90 days</option>
               <option>1 year</option>
               <option>Forever</option>
             </select>

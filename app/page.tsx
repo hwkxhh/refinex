@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Check, ChevronDown, Play, Upload } from 'lucide-react'
+import Footer from '@/components/layout/footer'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -111,7 +112,10 @@ export default function Home() {
                     className="object-contain"
                   />
                 </motion.div>
-                <span className="text-xl font-bold text-primary">Refinex</span>
+                <div className="leading-tight">
+                  <span className="text-xl font-bold text-primary block">RefineX</span>
+                  <span className="text-[10px] text-text-muted font-semibold block">Data Intelligence</span>
+                </div>
               </Link>
               
               {/* Navigation Links */}
@@ -238,11 +242,17 @@ export default function Home() {
                   </AnimatePresence>
                 </div>
 
-                <Link href="#connections" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
-                  Connections
+                <Link href="/how-it-works" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  How It Works
                 </Link>
-                <Link href="#pricing" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                <Link href="/use-cases" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  Use Cases
+                </Link>
+                <Link href="/pricing" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
                   Pricing
+                </Link>
+                <Link href="/blog" className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">
+                  Blog
                 </Link>
               </div>
             </div>
@@ -255,7 +265,7 @@ export default function Home() {
                   whileTap={{ scale: 0.98 }}
                   className="px-6 h-11 rounded-xl font-semibold text-gray-700 hover:text-primary hover:bg-[#F5F6FA] transition-all"
                 >
-                  Login
+                  Sign In
                 </motion.button>
               </Link>
               <Link href="/auth/signup">
@@ -264,17 +274,8 @@ export default function Home() {
                   whileTap={{ scale: 0.98 }}
                   className="px-6 h-11 rounded-xl card-gradient text-white font-semibold shadow-sm hover:shadow-md transition-all flex items-center gap-2"
                 >
-                  Sign Up
+                  Start for Free
                   <ArrowRight className="w-4 h-4" />
-                </motion.button>
-              </Link>
-              <Link href="/dashboard">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="hidden md:flex px-6 h-11 rounded-xl bg-[#F5F6FA] border border-border font-semibold text-gray-700 hover:border-primary transition-all items-center gap-2"
-                >
-                  Dashboard
                 </motion.button>
               </Link>
             </div>
@@ -306,22 +307,19 @@ export default function Home() {
                     height={20}
                   />
                   <span className="text-sm font-bold text-primary">
-                    AI-Powered Analytics
+                    The Data Analyst in Your Browser
                   </span>
                 </div>
               </motion.div>
 
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-foreground">
-                Transform data
+                Your data has answers.
                 <br />
-                into <span className="text-primary">insights</span>
-                <br />
-                instantly
+                RefineX finds them.
               </h1>
 
               <p className="text-xl text-text-secondary leading-relaxed max-w-xl">
-                Upload CSV files and watch AI analyze, clean, and visualize your data. 
-                No coding needed. Get actionable insights in seconds.
+                Upload any CSV or spreadsheet. RefineX cleans it, understands it, and tells you what it actually means — in plain language. No code. No data science degree. No waiting.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -331,7 +329,7 @@ export default function Home() {
                     whileTap={{ scale: 0.98 }}
                     className="px-8 h-14 rounded-2xl card-gradient text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                   >
-                    Start analyzing
+                    Analyze Your First File Free
                     <motion.div
                       animate={{ x: [0, 5, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
@@ -346,25 +344,19 @@ export default function Home() {
                     whileTap={{ scale: 0.98 }}
                     className="px-8 h-14 rounded-2xl dashboard-card font-bold text-lg flex items-center justify-center gap-2"
                   >
-                    <Upload className="w-5 h-5" />
-                    Upload CSV
+                    <Play className="w-5 h-5" />
+                    Watch 2-min Demo
                   </motion.button>
                 </Link>
               </div>
 
               <div className="flex flex-wrap items-center gap-6 pt-4">
-                {[
-                  'Free 14-day trial',
-                  'No credit card',
-                  'Cancel anytime'
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Check className="w-3 h-3 text-primary" strokeWidth={3} />
-                    </div>
-                    <span className="text-sm font-medium text-text-secondary">{item}</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Check className="w-3 h-3 text-primary" strokeWidth={3} />
                   </div>
-                ))}
+                  <span className="text-sm font-medium text-text-secondary">No credit card required · Works with CSV, XLSX, XLS · Results in under 60 seconds</span>
+                </div>
               </div>
             </motion.div>
 
@@ -811,9 +803,9 @@ export default function Home() {
                     className="dashboard-card p-8 rounded-3xl backdrop-blur-lg shadow-2xl relative overflow-hidden"
                     style={{ 
                       backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                      width: '280px',
-                      height: '240px',
-                      border: '3px solid #6366f1'
+                      width: '450px',
+                      height: '270px',
+                    
                     }}
                   >
                     {/* Animated Grid Inside */}
@@ -849,7 +841,7 @@ export default function Home() {
                     </div>
 
                     {/* Processing Icons */}
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-3">
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-5">
                       {['✓', '⚡', '🔍', '📊'].map((icon, i) => (
                         <motion.div
                           key={i}
@@ -880,8 +872,8 @@ export default function Home() {
                 {[0, 1, 2].map((index) => (
                   <motion.path
                     key={`right-${index}`}
-                    d={`M 490 200 Q 620 ${165 + index * 50} 750 ${145   + index * 68}`}
-                    stroke="rgba(99, 102, 241, 0.15)"
+                    d={`M 692 200 Q 835 ${[156, 212, 268][index]} 952 ${[145, 225, 304][index]}`}
+                    stroke="rgba(99, 102, 241, 0.22)"
                     strokeWidth="1.5"
                     fill="none"
                     strokeDasharray="4,4"
@@ -899,37 +891,35 @@ export default function Home() {
                 </defs>
               </svg>
 
-              {/* Right Side - Output Results */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 space-y-4 z-20">
-                {[
-                  { label: 'Insights', icon: '💡', delay: 2 },
-                  { label: 'Charts', icon: '📊', delay: 2.2 },
-                  { label: 'Reports', icon: '📄', delay: 2.4 }
-                ].map((output, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: output.delay }}
-                    whileHover={{ scale: 1.05, x: -5 }}
-                    className="dashboard-card px-5 py-4 rounded-xl backdrop-blur-lg shadow-lg cursor-pointer"
-                    style={{ 
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      width: '140px',
-                      border: '2px solid #a5b4fc'
-                    }}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="text-2xl">{output.icon}</div>
-                      <div>
-                        <span className="text-sm font-bold text-foreground block">{output.label}</span>
-                        <span className="text-xs text-primary font-semibold">Ready</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              {/* ── RIGHT SIDE – Output Results (same style as left) ── */}
+<div className="absolute right-0 top-1/2 -translate-y-1/2 space-y-4 z-20">
+  {[
+    { label: 'Insights', icon: '💡', badge: 'Ready', delay: 2   },
+    { label: 'Charts',   icon: '📊', badge: 'Ready', delay: 2.2 },
+    { label: 'Reports',  icon: '📄', badge: 'Ready', delay: 2.4 },
+  ].map((output, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: output.delay }}
+      whileHover={{ scale: 1.04, x: -4 }}
+      className="dashboard-card px-4 py-3 rounded-xl backdrop-blur-lg shadow-lg cursor-pointer"
+      style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', width: '140px' }}
+    >
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-base">
+          {output.icon}
+        </div>
+        <div>
+          <span className="text-xs font-bold text-foreground block">{output.label}</span>
+          <span className="text-xs text-primary font-semibold">{output.badge}</span>
+        </div>
+      </div>
+    </motion.div>
+  ))}
+</div>
 
               {/* Floating Particles */}
               {Array.from({ length: 8 }).map((_, i) => (
@@ -1038,49 +1028,49 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-foreground">
-              Built for modern <span className="text-primary">data teams</span>
+              Everything your data team<br />needs in <span className="text-primary">one platform</span>
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Everything you need to analyze, visualize, and share insights
+              Clean, analyze, visualize, and collaborate — all with complete transparency
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: 'icons8-chatbot-50.png',
-                title: 'AI Analysis',
-                description: 'Automatically detect trends, outliers, and patterns with ML algorithms',
+                icon: 'icons8-inspection-50.png',
+                title: 'Data Cleaning',
+                description: '200+ formulas across 47 column types. Every fix logged, every change reversible.',
                 color: '#5B4FE7'
               },
               {
-                icon: 'icons8-area-chart-50.png',
-                title: 'Visual Dashboards',
-                description: 'Create interactive charts that make complex data easy to understand',
+                icon: 'icons8-chatbot-50.png',
+                title: 'AI Insights',
+                description: 'Plain-language observations specific to your data. Not generic dashboards — real findings.',
                 color: '#7367F0'
               },
               {
-                icon: 'icons8-inspection-50.png',
-                title: 'Data Cleaning',
-                description: 'One-click fixes for missing values, duplicates, and formatting issues',
+                icon: 'icons8-area-chart-50.png',
+                title: '14 Chart Types',
+                description: 'Bar, line, pie, scatter, heatmap, treemap, and more. Customize, export, or embed.',
                 color: '#9785FF'
               },
               {
-                icon: 'icons8-increase-50.png',
-                title: 'Predictions',
-                description: 'Forecast future trends with confidence scores and statistical modeling',
+                icon: 'icons8-process-50.png',
+                title: 'Formula Verification',
+                description: 'Detects calculated columns and checks every row. Catches formula errors before they matter.',
                 color: '#5B4FE7'
               },
               {
-                icon: 'icons8-delivery-time-50.png',
-                title: 'Lightning Fast',
-                description: 'Process millions of rows in seconds with optimized cloud infrastructure',
+                icon: 'icons8-increase-50.png',
+                title: 'Multi-File Analysis',
+                description: 'Upload files across periods. RefineX aligns, compares, and surfaces trends automatically.',
                 color: '#7367F0'
               },
               {
                 icon: 'icons8-guarantee-50.png',
-                title: 'Secure',
-                description: 'Enterprise-grade security with encryption, SSO, and compliance',
+                title: 'Secure & Private',
+                description: 'Encrypted at rest, PII auto-tagged, zero AI training on your data. Delete anytime.',
                 color: '#9785FF'
               }
             ].map((feature, index) => (
@@ -1116,6 +1106,18 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-center mt-10"
+          >
+            <Link href="/features" className="text-primary font-semibold text-sm hover:underline inline-flex items-center gap-1">
+              See all 9 features in detail <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -1129,10 +1131,12 @@ export default function Home() {
             className="dashboard-card rounded-3xl p-12 lg:p-16 text-center"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Ready to get started?
+              Your data is waiting
+              <br />
+              to tell you something.
             </h2>
             <p className="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
-              Join thousands of data teams using Refine to make better decisions
+              Start with your first file. Free. No credit card. No setup.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/auth/signup">
@@ -1141,84 +1145,20 @@ export default function Home() {
                   whileTap={{ scale: 0.98 }}
                   className="px-10 h-14 rounded-2xl card-gradient text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
                 >
-                  Start free trial
+                  Analyze Your First File Free
                   <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </Link>
-              <Link href="/dashboard">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-10 h-14 rounded-2xl dashboard-card font-bold text-lg flex items-center gap-2"
-                >
-                  <Play className="w-5 h-5" />
-                  View demo
-                </motion.button>
+              <Link href="/pricing" className="text-primary font-semibold flex items-center justify-center gap-1 px-4 h-14">
+                Compare plans <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <p className="text-sm text-text-muted mt-6">
-              No credit card required • Cancel anytime • 14-day free trial
-            </p>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-16 border-t border-border">
-        <div className="mx-auto px-6 lg:px-12 max-w-[1400px]">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div>
-              <Link href="/" className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl dashboard-card flex items-center justify-center">
-                  <Image 
-                    src="/icons8/icons8-bar-chart-50.png"
-                    alt="Logo"
-                    width={24}
-                    height={24}
-                  />
-                </div>
-                <span className="text-lg font-bold text-foreground">Refine</span>
-              </Link>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                Turn messy CSV data into actionable insights with AI-powered analytics.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold text-foreground mb-4">Product</h4>
-              <ul className="space-y-2.5 text-sm text-text-secondary">
-                <li><Link href="#features" className="hover:text-primary transition-colors">Features</Link></li>
-                <li><Link href="#pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Documentation</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-foreground mb-4">Company</h4>
-              <ul className="space-y-2.5 text-sm text-text-secondary">
-                <li><Link href="#" className="hover:text-primary transition-colors">About</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Blog</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-foreground mb-4">Legal</h4>
-              <ul className="space-y-2.5 text-sm text-text-secondary">
-                <li><Link href="#" className="hover:text-primary transition-colors">Privacy</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Terms</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-text-muted">
-              © 2026 Refine. All rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link href="#" className="text-text-muted hover:text-primary transition-colors text-sm">Twitter</Link>
-              <Link href="#" className="text-text-muted hover:text-primary transition-colors text-sm">LinkedIn</Link>
-              <Link href="#" className="text-text-muted hover:text-primary transition-colors text-sm">GitHub</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

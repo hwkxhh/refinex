@@ -4,13 +4,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { 
-  LayoutDashboard, 
-  Upload, 
-  FolderOpen, 
-  FileText, 
-  LayoutTemplate, 
+  LayoutDashboard,
+  FolderOpen,
+  Lightbulb,
+  BarChart3,
+  History,
+  Users,
+  Database,
   Settings, 
   HelpCircle,
+  BookOpen,
+  Sparkles,
   LucideIcon
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -22,11 +26,13 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Upload', href: '/dashboard/upload', icon: Upload },
-  { name: 'Projects', href: '/dashboard/projects', icon: FolderOpen },
-  { name: 'Reports', href: '/dashboard/reports', icon: FileText },
-  { name: 'Templates', href: '/dashboard/templates', icon: LayoutTemplate },
+  { name: 'Home', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Analyses', href: '/dashboard/analyses', icon: FolderOpen },
+  { name: 'Datasets', href: '/dashboard/datasets', icon: Database },
+  { name: 'Insights', href: '/dashboard/insights', icon: Lightbulb },
+  { name: 'Visualizations', href: '/dashboard/visualizations', icon: BarChart3 },
+  { name: 'History', href: '/dashboard/history', icon: History },
+  { name: 'Team', href: '/dashboard/team', icon: Users },
   { name: 'Settings', href: '/dashboard/settings', icon: Settings },
 ]
 
@@ -46,7 +52,10 @@ export function Sidebar() {
             className="object-contain"
           />
         </div>
-        <span className="text-xl font-bold text-primary">Refine</span>
+        <div className="leading-tight">
+          <p className="text-xl font-bold text-primary">RefineX</p>
+          <p className="text-[10px] text-text-muted font-medium">Data Intelligence</p>
+        </div>
       </div>
 
       {/* Navigation */}
@@ -71,14 +80,28 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* Help */}
+      {/* Footer Links */}
       <div className="px-4 py-6 border-t border-border">
+        <Link
+          href="/dashboard/billing"
+          className="mb-2 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-text-secondary hover:bg-muted/30 hover:text-foreground transition-all duration-200"
+        >
+          <Sparkles className="w-5 h-5" />
+          <span>Upgrade to Pro</span>
+        </Link>
+        <Link
+          href="/dashboard/help"
+          className="mb-2 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-text-secondary hover:bg-muted/30 hover:text-foreground transition-all duration-200"
+        >
+          <BookOpen className="w-5 h-5" />
+          <span>Documentation</span>
+        </Link>
         <Link
           href="/dashboard/help"
           className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-text-secondary hover:bg-muted/30 hover:text-foreground transition-all duration-200"
         >
           <HelpCircle className="w-5 h-5" />
-          <span>Help & Docs</span>
+          <span>Help & Support</span>
         </Link>
       </div>
     </aside>
