@@ -29,6 +29,29 @@ export const mockRegionData = [
   { region: 'Middle East', sales: 98000, growth: 18.9 }
 ]
 
+export const topProductsData = [
+  { name: 'MacBook Pro 14"', revenue: 142000, units: 87, growth: 18 },
+  { name: 'Ergonomic Chair', revenue: 98000, units: 245, growth: 31 },
+  { name: 'Office Suite Pro', revenue: 76000, units: 312, growth: 42 },
+  { name: 'Standing Desk', revenue: 62000, units: 134, growth: 12 },
+  { name: 'Wireless Headset', revenue: 48000, units: 523, growth: 27 },
+]
+
+export const salespersonData = [
+  { name: 'Sarah Chen', revenue: 128000, target: 101200, deals: 34 },
+  { name: 'Marcus Reid', revenue: 104000, target: 95000, deals: 28 },
+  { name: 'Priya Nair', revenue: 89000, target: 95000, deals: 23 },
+  { name: "James O'Brien", revenue: 76000, target: 110000, deals: 19 },
+  { name: 'Fatima Al-Zahra', revenue: 71000, target: 105000, deals: 18 },
+]
+
+export const goalVsActualData = [
+  { metric: 'Revenue', goal: 680000, actual: 740000 },
+  { metric: 'Orders', goal: 3200, actual: 3653 },
+  { metric: 'Customers', goal: 2650, actual: 2543 },
+  { metric: 'Avg Order Value', goal: 190, actual: 203 },
+]
+
 export const mockInsights = [
   {
     id: '1',

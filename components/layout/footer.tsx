@@ -1,12 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 
 export default function Footer() {
   const [expandedColumn, setExpandedColumn] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleColumn = (col: string) => {
     setExpandedColumn(expandedColumn === col ? null : col)
@@ -84,7 +89,7 @@ export default function Footer() {
               <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">Product</h4>
               <ChevronDown className={`w-4 h-4 md:hidden transition-transform ${expandedColumn === 'product' ? 'rotate-180' : ''}`} />
             </button>
-            <ul className={`space-y-2.5 text-sm text-text-secondary mt-4 md:mt-0 ${expandedColumn === 'product' || typeof window !== 'undefined' ? 'block' : 'hidden md:block'}`}>
+            <ul className={`space-y-2.5 text-sm text-text-secondary mt-4 md:mt-0 ${expandedColumn === 'product' || mounted ? 'block' : 'hidden md:block'}`}>
               <li><Link href="/how-it-works" className="hover:text-primary transition-colors">How It Works</Link></li>
               <li><Link href="/features" className="hover:text-primary transition-colors">Features</Link></li>
               <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
